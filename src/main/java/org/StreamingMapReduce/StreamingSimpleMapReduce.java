@@ -11,7 +11,7 @@ import java.util.concurrent.LinkedBlockingDeque;
  * Hello world!
  * @author liubi
  */
-public class ConcurrentSimpleMapReduce {
+public class StreamingSimpleMapReduce {
 
     private BlockingQueue<String> input;
     private ArrayList<BlockingQueue<String>> splittingBuckets;
@@ -20,7 +20,7 @@ public class ConcurrentSimpleMapReduce {
     private ConcurrentHashMap<String, Integer> reducingBuckets;
     private ConcurrentHashMap<String, Integer> result;
 
-    public ConcurrentSimpleMapReduce(int splittingBucketNum, int mappingBucketNum) {
+    public StreamingSimpleMapReduce(int splittingBucketNum, int mappingBucketNum) {
         input = new LinkedBlockingDeque<>();
 
         splittingBuckets = new ArrayList<>(splittingBucketNum);
@@ -76,7 +76,7 @@ public class ConcurrentSimpleMapReduce {
     }
 
     public static void main(String[] args) {
-        ConcurrentSimpleMapReduce concurrentSimpleMapReduce = new ConcurrentSimpleMapReduce(3, 3);
+        StreamingSimpleMapReduce concurrentSimpleMapReduce = new StreamingSimpleMapReduce(3, 3);
         concurrentSimpleMapReduce.mapReduce("text.txt", 3, 3, 4, 4);
         concurrentSimpleMapReduce.getResult();
     }
