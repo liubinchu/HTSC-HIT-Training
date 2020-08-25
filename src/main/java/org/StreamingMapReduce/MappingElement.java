@@ -1,4 +1,4 @@
-package org.ConcurrentSimpleMapReduce;
+package org.StreamingMapReduce;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package org.ConcurrentSimpleMapReduce;
+package org.StreamingMapReduce;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -9,6 +9,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * Hello world!
+ * @author liubi
  */
 public class ConcurrentSimpleMapReduce {
 

@@ -1,4 +1,6 @@
-package org.ConcurrentSimpleMapReduce;
+package org.StreamingMapReduce;
+
+import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,10 +11,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author liubi
  * @date 2020-08-25 19:13
  **/
-class ShufflingWorker extends Thread{
-    private int workerId;
-    private ArrayList<BlockingQueue<MappingElement>> mappingBuckets;
-    private ConcurrentHashMap<String, LinkedList<Integer>> shuffingBuckets;
+@Log4j2
+class ShufflingWorker extends Thread {
+    private final int workerId;
+    private final ArrayList<BlockingQueue<MappingElement>> mappingBuckets;
+    private final ConcurrentHashMap<String, LinkedList<Integer>> shuffingBuckets;
 
     public ShufflingWorker(int workerId, ArrayList<BlockingQueue<MappingElement>> mappingBuckets, ConcurrentHashMap<String, LinkedList<Integer>> shuffingBuckets) {
         this.workerId = workerId;
@@ -28,13 +31,15 @@ class ShufflingWorker extends Thread{
         while (true) {
             try {
                 mappingElement = mappingBucket.take();
-                System.out.println("Take " +mappingElement+" from mappingBucket");
-                if (!shuffingBuckets.containsKey(mappingElement.getKey())) {
-                    shuffingBuckets.put(mappingElement.getKey(), new LinkedList<Integer>());
-                } else {
-                    shuffingBuckets.get(mappingElement.getKey()).add(mappingElement.getValue());
+                log.info("Take " + mappingElement + " from mappingBucket");
+                synchronized (this.shuffingBuckets) {
+                    if (!shuffingBuckets.containsKey(mappingElement.getKey())) {
+                        shuffingBuckets.put(mappingElement.getKey(), new LinkedList<Integer>());
+                    } else {
+                        shuffingBuckets.get(mappingElement.getKey()).add(mappingElement.getValue());
+                    }
                 }
-                System.out.println("Put " +mappingElement+" into shufflingBuckets");
+                log.info("Put " + mappingElement + " into shufflingBuckets");
 
             } catch (InterruptedException e) {
                 e.printStackTrace();

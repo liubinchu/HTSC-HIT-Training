@@ -1,4 +1,6 @@
-package org.ConcurrentSimpleMapReduce;
+package org.StreamingMapReduce;
+
+import lombok.extern.log4j.Log4j2;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,6 +12,7 @@ import java.util.concurrent.BlockingQueue;
  * @author liubi
  * @date 2020-08-25 19:11
  **/
+@Log4j2
 class SimpleFileReader extends Thread{
     private  String FilePath;
     private  BlockingQueue<String> input;
@@ -22,7 +25,7 @@ class SimpleFileReader extends Thread{
 
     @Override
     public void run() {
-        System.out.println("Starting reading File:" + FilePath + " AT " + new Timestamp(System.currentTimeMillis()));
+        log.info("Starting reading File:" + FilePath + " AT " + new Timestamp(System.currentTimeMillis()));
         try {
             BufferedReader in = new BufferedReader(new FileReader(FilePath));
             String str;
@@ -33,11 +36,10 @@ class SimpleFileReader extends Thread{
                         continue;
                     }
                     this.input.put(s);
-                    System.out.println("Put"+s+"into input");
+                    log.info("Put"+s+"into input");
                 }
             }
-            System.out.println("Finishing reading File:" + FilePath + " AT " + new Timestamp(System.currentTimeMillis()));
-          //  System.out.println("File Content:"+this.input);
+            log.info("Finishing reading File:" + FilePath + " AT " + new Timestamp(System.currentTimeMillis()));
        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

@@ -1,4 +1,6 @@
-package org.ConcurrentSimpleMapReduce;
+package org.StreamingMapReduce;
+
+import lombok.extern.log4j.Log4j2;
 
 import java.util.ArrayList;
 import java.util.concurrent.BlockingQueue;
@@ -7,6 +9,7 @@ import java.util.concurrent.BlockingQueue;
  * @author liubi
  * @date 2020-08-25 19:12
  **/
+@Log4j2
 class SplittingWorker extends Thread{
     private int workerId;
     private BlockingQueue<String> input;
@@ -25,9 +28,9 @@ class SplittingWorker extends Thread{
             String s = null;
             try {
                 s = input.take();
-                System.out.println("Take " +s+" from Input");
+                log.info("Take " +s+" from Input");
                 splittingBuckets.get(bucketId).put(s);
-                System.out.println("Put " +s+" into splittingBucket id:"+bucketId);
+                log.info("Put " +s+" into splittingBucket id:"+bucketId);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
