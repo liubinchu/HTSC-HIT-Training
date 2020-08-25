@@ -36,11 +36,14 @@ class ReducingWorker extends Thread {
                     int v = mappingElement.getValue();
                     if (!reducingBuckets.containsKey(mappingElement.getKey())) {
                         reducingBuckets.put(mappingElement.getKey(), v);
+                        log.info("Put " + k + " into reducingBuckets, with frequency "+v);
                     } else {
-                        reducingBuckets.put(mappingElement.getKey(), reducingBuckets.get(k) + v);
+                        int newV = reducingBuckets.get(k) + v;
+                        reducingBuckets.put(mappingElement.getKey(), newV);
+                        log.info("Put " + k + " into reducingBuckets, with frequency "+newV);
                     }
                 }
-                log.info("Put " + mappingElement + " into reducingBuckets");
+
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
