@@ -46,7 +46,7 @@ public class StreamingSimpleMapReduce {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                String filePath = "streamingMapReduceRes" + System.currentTimeMillis() + ".json";
+                String filePath = "streamingMapReduceRes" + System.currentTimeMillis()+ ".json";
                 File file = new File(filePath);
                 FileWriter fileWriter;
                 try {
@@ -77,12 +77,10 @@ public class StreamingSimpleMapReduce {
         }
 
         resRecord();
-
     }
 
     public static void main(String[] args) {
         StreamingSimpleMapReduce concurrentSimpleMapReduce = new StreamingSimpleMapReduce(3, 3);
         concurrentSimpleMapReduce.mapReduce("text.txt", 3, 3, 4, 4);
-
     }
 }
