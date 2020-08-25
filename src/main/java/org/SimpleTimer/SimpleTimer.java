@@ -1,4 +1,4 @@
-package org.example;
+package org.SimpleTimer;
 
 import java.sql.Timestamp;
 import java.util.*;
