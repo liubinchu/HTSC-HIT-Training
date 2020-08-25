@@ -2,7 +2,6 @@ package org.StreamingMapReduce;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -10,13 +9,14 @@ import java.util.concurrent.LinkedBlockingDeque;
 /**
  * Hello world!
  * @author liubi
+ * 流式 mapReduce， 文件可以一直append
+ * 如何打印结果 还未实现
  */
 public class StreamingSimpleMapReduce {
 
     private BlockingQueue<String> input;
     private ArrayList<BlockingQueue<String>> splittingBuckets;
     private ArrayList<BlockingQueue<MappingElement>> mappingBuckets;
-    private ConcurrentHashMap<String, LinkedList<Integer>> shuffingBuckets;
     private ConcurrentHashMap<String, Integer> reducingBuckets;
     private ConcurrentHashMap<String, Integer> result;
 
@@ -32,14 +32,7 @@ public class StreamingSimpleMapReduce {
             mappingBuckets.add(new LinkedBlockingDeque<MappingElement>());
         }
 
-        shuffingBuckets = new ConcurrentHashMap<>();
-
         reducingBuckets = new ConcurrentHashMap<>();
-    }
-
-    public void getResult() {
-        result = new ConcurrentHashMap<>(reducingBuckets);
-        System.out.println("Result: " + result);
     }
 
     public void mapReduce(String filePath, int splittingWorkerNum, int mappingWorkerNum, int shufflingWorkerNum, int reducingWorkerNum) {
@@ -61,13 +54,8 @@ public class StreamingSimpleMapReduce {
             new MappingWorker(i, this.splittingBuckets, this.mappingBuckets).start();
         }
 
-        //int shufflingWorkerNum = 4;
-        for (int i = 0; i < shufflingWorkerNum; i++) {
-            new ShufflingWorker(i, this.mappingBuckets, this.shuffingBuckets).start();
-        }
-
         for (int i = 0; i < reducingWorkerNum; i++) {
-            new ReducingWorker(this.shuffingBuckets, this.reducingBuckets).start();
+            new ReducingWorker(i,this.mappingBuckets, this.reducingBuckets).start();
         }
 
        /* System.out.println(shuffingBuckets);
@@ -78,6 +66,6 @@ public class StreamingSimpleMapReduce {
     public static void main(String[] args) {
         StreamingSimpleMapReduce concurrentSimpleMapReduce = new StreamingSimpleMapReduce(3, 3);
         concurrentSimpleMapReduce.mapReduce("text.txt", 3, 3, 4, 4);
-        concurrentSimpleMapReduce.getResult();
+
     }
 }

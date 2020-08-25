@@ -2,42 +2,48 @@ package org.StreamingMapReduce;
 
 import lombok.extern.log4j.Log4j2;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author liubi
- * @date 2020-08-25 19:14
+ * @date 2020-08-25 19:13
  **/
 @Log4j2
 class ReducingWorker extends Thread {
-    private final ConcurrentHashMap<String, LinkedList<Integer>> shuffingBuckets;
-    private ConcurrentHashMap<String, Integer> reducingBuckets;
+    private final int workerId;
+    private final ArrayList<BlockingQueue<MappingElement>> mappingBuckets;
+    private final ConcurrentHashMap<String, Integer> reducingBuckets;
 
-    public ReducingWorker(ConcurrentHashMap<String, LinkedList<Integer>> shuffingBuckets, ConcurrentHashMap<String, Integer> reducingBuckets) {
-        this.shuffingBuckets = shuffingBuckets;
+    public ReducingWorker(int workerId, ArrayList<BlockingQueue<MappingElement>> mappingBuckets, ConcurrentHashMap<String, Integer> reducingBuckets) {
+        this.workerId = workerId;
+        this.mappingBuckets = mappingBuckets;
         this.reducingBuckets = reducingBuckets;
     }
 
     @Override
     public void run() {
+        int mappingBucketId = workerId % mappingBuckets.size();
+        BlockingQueue<MappingElement> mappingBucket = mappingBuckets.get(mappingBucketId);
+        MappingElement mappingElement;
         while (true) {
-            synchronized (shuffingBuckets) {
-                while (shuffingBuckets.keys().hasMoreElements()) {
-                    String key = shuffingBuckets.keys().nextElement();
-                    LinkedList<Integer> value = shuffingBuckets.get(key);
-                    for (int v : value) {
-                        if (!reducingBuckets.containsKey(key)) {
-                            reducingBuckets.put(key, 1);
-                        } else {
-                            int tmp = reducingBuckets.get(key);
-                            reducingBuckets.put(key, ++tmp);
-                        }
-                        log.info("Put " + key + " into reducingBuckets");
+            try {
+                mappingElement = mappingBucket.take();
+                log.info("Take " + mappingElement + " from mappingBucket");
+                synchronized (this.reducingBuckets) {
+                    String k = mappingElement.getKey();
+                    int v = mappingElement.getValue();
+                    if (!reducingBuckets.containsKey(mappingElement.getKey())) {
+                        reducingBuckets.put(mappingElement.getKey(), v);
+                    } else {
+                        reducingBuckets.put(mappingElement.getKey(), reducingBuckets.get(k) + v);
                     }
-                    shuffingBuckets.remove(key);
-                    log.info("Take " + key + " from shufflingBuckets");
                 }
+                log.info("Put " + mappingElement + " into reducingBuckets");
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
