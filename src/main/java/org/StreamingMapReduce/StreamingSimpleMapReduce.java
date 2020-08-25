@@ -1,13 +1,20 @@
 package org.StreamingMapReduce;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingDeque;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Hello world!
+ *
  * @author liubi
  * 流式 mapReduce， 文件可以一直append
  * 如何打印结果 还未实现
@@ -18,7 +25,6 @@ public class StreamingSimpleMapReduce {
     private ArrayList<BlockingQueue<String>> splittingBuckets;
     private ArrayList<BlockingQueue<MappingElement>> mappingBuckets;
     private ConcurrentHashMap<String, Integer> reducingBuckets;
-    private ConcurrentHashMap<String, Integer> result;
 
     public StreamingSimpleMapReduce(int splittingBucketNum, int mappingBucketNum) {
         input = new LinkedBlockingDeque<>();
@@ -35,32 +41,43 @@ public class StreamingSimpleMapReduce {
         reducingBuckets = new ConcurrentHashMap<>();
     }
 
+    private void resRecord() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                String filePath = "streamingMapReduceRes" + System.currentTimeMillis() + ".json";
+                File file = new File(filePath);
+                FileWriter fileWriter;
+                try {
+                    fileWriter = new FileWriter(filePath);
+                    ObjectMapper mapper = new ObjectMapper();
+                    mapper.writeValue(fileWriter,reducingBuckets );
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Timestamp(System.currentTimeMillis()), 1000);
+    }
+
     public void mapReduce(String filePath, int splittingWorkerNum, int mappingWorkerNum, int shufflingWorkerNum, int reducingWorkerNum) {
-        Timestamp start = new Timestamp(System.currentTimeMillis());
 
+        new SimpleFileReader(filePath, this.input).start();
 
-        Thread fileReader = new SimpleFileReader(filePath, this.input);
-        fileReader.start();
-
-
-        //int splittingWorkerNum = 3;
         for (int i = 0; i < splittingWorkerNum; i++) {
             new SplittingWorker(i, this.input, this.splittingBuckets).start();
         }
 
-
-        //int mappingWorkerNum = 3;
         for (int i = 0; i < mappingWorkerNum; i++) {
             new MappingWorker(i, this.splittingBuckets, this.mappingBuckets).start();
         }
 
         for (int i = 0; i < reducingWorkerNum; i++) {
-            new ReducingWorker(i,this.mappingBuckets, this.reducingBuckets).start();
+            new ReducingWorker(i, this.mappingBuckets, this.reducingBuckets).start();
         }
 
-       /* System.out.println(shuffingBuckets);
-        Timestamp end = new Timestamp(System.currentTimeMillis());
-        System.out.println("consuming time:" + (end.getTime() - start.getTime()) + "ms");*/
+        resRecord();
+
     }
 
     public static void main(String[] args) {
