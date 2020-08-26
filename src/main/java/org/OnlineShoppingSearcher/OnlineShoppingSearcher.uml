@@ -3,23 +3,39 @@
   <ID>JAVA</ID>
   <OriginalElement>org.OnlineShoppingSearcher</OriginalElement>
   <nodes>
-    <node x="439.0" y="556.0">org.OnlineShoppingSearcher.ComputerSpec</node>
-    <node x="316.0" y="0.0">org.OnlineShoppingSearcher.PCClass</node>
-    <node x="238.0" y="291.0">org.OnlineShoppingSearcher.PCType</node>
-    <node x="0.0" y="556.0">org.OnlineShoppingSearcher.ComputerInventory</node>
-    <node x="0.0" y="0.0">org.OnlineShoppingSearcher.Computer</node>
-    <node x="0.0" y="291.0">org.OnlineShoppingSearcher.Brand</node>
+    <node x="36.6875" y="0.0">org.OnlineShoppingSearcher.ComputerSpec</node>
+    <node x="233.25" y="0.0">org.OnlineShoppingSearcher.PCClass</node>
+    <node x="0.0" y="334.0">org.OnlineShoppingSearcher.PCType</node>
+    <node x="2.25" y="226.0">org.OnlineShoppingSearcher.ComputerInventory</node>
+    <node x="15.25" y="113.0">org.OnlineShoppingSearcher.Computer</node>
+    <node x="150.0" y="334.0">org.OnlineShoppingSearcher.Brand</node>
   </nodes>
   <notes />
-  <edges />
-  <settings layout="Hierarchic Group" zoom="1.0302869287991498" x="546.0976339244628" y="482.7979452164553" />
-  <SelectedNodes>
-    <node>org.OnlineShoppingSearcher.PCType</node>
-  </SelectedNodes>
-  <Categories>
-    <Category>Fields</Category>
-    <Category>Methods</Category>
-  </Categories>
+  <edges>
+    <edge source="org.OnlineShoppingSearcher.Computer" target="org.OnlineShoppingSearcher.ComputerSpec">
+      <point x="0.0" y="-31.5" />
+      <point x="75.25" y="88.0" />
+      <point x="73.9375" y="88.0" />
+      <point x="-37.25" y="31.5" />
+    </edge>
+    <edge source="org.OnlineShoppingSearcher.ComputerInventory" target="org.OnlineShoppingSearcher.ComputerSpec">
+      <point x="69.75" y="-31.5" />
+      <point x="165.0" y="201.0" />
+      <point x="145.75" y="201.0" />
+      <point x="145.75" y="88.0" />
+      <point x="148.4375" y="88.0" />
+      <point x="37.25" y="31.5" />
+    </edge>
+    <edge source="org.OnlineShoppingSearcher.ComputerInventory" target="org.OnlineShoppingSearcher.Computer">
+      <point x="-23.25" y="-31.5" />
+      <point x="72.0" y="201.0" />
+      <point x="75.25" y="201.0" />
+      <point x="0.0" y="31.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0302869287991498" x="387.6534296028881" y="303.2382671480144" />
+  <SelectedNodes />
+  <Categories />
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>
