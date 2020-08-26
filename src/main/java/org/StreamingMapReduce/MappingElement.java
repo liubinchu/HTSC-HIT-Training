@@ -1,5 +1,6 @@
 package org.StreamingMapReduce;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -7,20 +8,8 @@ import lombok.Data;
  * @date 2020-08-25 19:10
  **/
 @Data
+@AllArgsConstructor
 class MappingElement {
-    String key;
-    Integer value;
-
-    public MappingElement(String key, Integer value) {
-        this.key = key;
-        this.value = value;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public Integer getValue() {
-        return value;
-    }
+    private String key;
+    private Integer value;
 }

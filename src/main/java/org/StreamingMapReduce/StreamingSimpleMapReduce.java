@@ -7,9 +7,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.*;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -42,12 +41,11 @@ public class StreamingSimpleMapReduce {
     }
 
     private void resRecord() {
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
+        ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(1);
+        scheduledExecutorService.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 String filePath = "streamingMapReduceRes" + System.currentTimeMillis()+ ".json";
-                File file = new File(filePath);
                 FileWriter fileWriter;
                 try {
                     fileWriter = new FileWriter(filePath);
@@ -57,7 +55,7 @@ public class StreamingSimpleMapReduce {
                     e.printStackTrace();
                 }
             }
-        }, new Timestamp(System.currentTimeMillis()), 1000);
+        }, 0,1,TimeUnit.SECONDS);
     }
 
     public void mapReduce(String filePath, int splittingWorkerNum, int mappingWorkerNum, int shufflingWorkerNum, int reducingWorkerNum) {
