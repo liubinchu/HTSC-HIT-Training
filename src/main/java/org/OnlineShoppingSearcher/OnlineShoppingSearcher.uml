@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.OnlineShoppingSearcher</OriginalElement>
+  <nodes>
+    <node x="439.0" y="556.0">org.OnlineShoppingSearcher.ComputerSpec</node>
+    <node x="316.0" y="0.0">org.OnlineShoppingSearcher.PCClass</node>
+    <node x="238.0" y="291.0">org.OnlineShoppingSearcher.PCType</node>
+    <node x="0.0" y="556.0">org.OnlineShoppingSearcher.ComputerInventory</node>
+    <node x="0.0" y="0.0">org.OnlineShoppingSearcher.Computer</node>
+    <node x="0.0" y="291.0">org.OnlineShoppingSearcher.Brand</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="1.0302869287991498" x="546.0976339244628" y="482.7979452164553" />
+  <SelectedNodes>
+    <node>org.OnlineShoppingSearcher.PCType</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

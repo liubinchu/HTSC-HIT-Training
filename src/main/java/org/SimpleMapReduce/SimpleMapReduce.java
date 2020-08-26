@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  * Hello world!
+ * @author liubi
  */
 public class SimpleMapReduce {
 
