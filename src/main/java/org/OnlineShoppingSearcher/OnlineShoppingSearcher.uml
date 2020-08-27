@@ -3,39 +3,43 @@
   <ID>JAVA</ID>
   <OriginalElement>org.OnlineShoppingSearcher</OriginalElement>
   <nodes>
-    <node x="36.6875" y="0.0">org.OnlineShoppingSearcher.ComputerSpec</node>
-    <node x="233.25" y="0.0">org.OnlineShoppingSearcher.PCClass</node>
-    <node x="0.0" y="334.0">org.OnlineShoppingSearcher.PCType</node>
-    <node x="2.25" y="226.0">org.OnlineShoppingSearcher.ComputerInventory</node>
-    <node x="15.25" y="113.0">org.OnlineShoppingSearcher.Computer</node>
-    <node x="150.0" y="334.0">org.OnlineShoppingSearcher.Brand</node>
+    <node x="76.02083333333331" y="0.0">org.OnlineShoppingSearcher.ComputerSpec</node>
+    <node x="446.25" y="0.0">org.OnlineShoppingSearcher.PCClass</node>
+    <node x="0.0" y="752.0">org.OnlineShoppingSearcher.PCType</node>
+    <node x="7.25" y="564.0">org.OnlineShoppingSearcher.ComputerInventory</node>
+    <node x="0.0" y="295.0">org.OnlineShoppingSearcher.Computer</node>
+    <node x="697.25" y="0.0">org.OnlineShoppingSearcher.Brand</node>
   </nodes>
   <notes />
   <edges>
     <edge source="org.OnlineShoppingSearcher.Computer" target="org.OnlineShoppingSearcher.ComputerSpec">
-      <point x="0.0" y="-31.5" />
-      <point x="75.25" y="88.0" />
-      <point x="73.9375" y="88.0" />
-      <point x="-37.25" y="31.5" />
+      <point x="0.0" y="-109.5" />
+      <point x="155.0" y="270.0" />
+      <point x="156.27083333333331" y="270.0" />
+      <point x="-80.25" y="122.5" />
     </edge>
     <edge source="org.OnlineShoppingSearcher.ComputerInventory" target="org.OnlineShoppingSearcher.ComputerSpec">
-      <point x="69.75" y="-31.5" />
-      <point x="165.0" y="201.0" />
-      <point x="145.75" y="201.0" />
-      <point x="145.75" y="88.0" />
-      <point x="148.4375" y="88.0" />
-      <point x="37.25" y="31.5" />
+      <point x="147.75" y="-71.5" />
+      <point x="352.0" y="539.0" />
+      <point x="320.5" y="539.0" />
+      <point x="320.5" y="270.0" />
+      <point x="316.77083333333337" y="270.0" />
+      <point x="80.25000000000003" y="122.5" />
     </edge>
     <edge source="org.OnlineShoppingSearcher.ComputerInventory" target="org.OnlineShoppingSearcher.Computer">
-      <point x="-23.25" y="-31.5" />
-      <point x="72.0" y="201.0" />
-      <point x="75.25" y="201.0" />
-      <point x="0.0" y="31.5" />
+      <point x="-49.25" y="-71.5" />
+      <point x="0.0" y="109.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0302869287991498" x="387.6534296028881" y="303.2382671480144" />
-  <SelectedNodes />
-  <Categories />
+  <settings layout="Hierarchic Group" zoom="1.0302869287991498" x="387.6534296028881" y="175.09128416709643" />
+  <SelectedNodes>
+    <node>org.OnlineShoppingSearcher.Brand</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+  </Categories>
   <SCOPE>All</SCOPE>
   <VISIBILITY>private</VISIBILITY>
 </Diagram>

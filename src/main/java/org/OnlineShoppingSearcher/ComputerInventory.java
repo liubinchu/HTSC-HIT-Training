@@ -1,10 +1,7 @@
 package org.OnlineShoppingSearcher;
 
-import lombok.ToString;
-
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author liubi
