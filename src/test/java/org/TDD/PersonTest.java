@@ -13,6 +13,14 @@ public class PersonTest {
         Person person = new Person("Jeff", "Xiong");
         Assert.assertTrue(person.fullName().equals("Jeff Xiong"));
     }
-    public void PersonTest() {
+
+    @Test
+    public void testXOSimple() {
+        Assert.assertEquals(true, XO.check("XXOO"));
+    }
+
+    @Test
+    public void testXODifferent() {
+        Assert.assertEquals(false, XO.check("XXOOO"));
     }
 }
