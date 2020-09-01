@@ -1,6 +1,5 @@
 package org.ComplicatedCustomerSearcher;
 
-import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
 import lombok.AllArgsConstructor;
 
 /**

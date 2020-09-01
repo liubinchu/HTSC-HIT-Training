@@ -2,8 +2,6 @@ package org.ComplicatedCustomerSearcher;
 
 import lombok.AllArgsConstructor;
 
-import java.util.Map;
-
 /**
  * @author liubi
  * @date 2020-08-31 18:24

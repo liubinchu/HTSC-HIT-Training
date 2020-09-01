@@ -130,16 +130,5 @@ public class SQLParser {
         }else{
             return stack.pop();
         }
-
-    }
-
-    public static void main(String[] args) {
-        String whereExpression = "companyName == 'HTSC' OR ( ( age < 30 ) AND ( sex != \"Male\" ) )";
-        //将中缀表达式转换为后缀表达式
-        List<String> suffixList = SQLParser.toSuffixExpression(whereExpression);
-
-        System.out.println(suffixList);
-        Expression whereExpr = SQLParser.parse(whereExpression);
-        System.out.println(whereExpr.interpretSQL());
     }
 }
