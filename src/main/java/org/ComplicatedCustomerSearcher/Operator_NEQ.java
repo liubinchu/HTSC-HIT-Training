@@ -13,6 +13,6 @@ public class Operator_NEQ implements Expression{
     Expression left;
     @Override
     public String interpretSQL() {
-        return right.interpretSQL() + " != "+left.interpretSQL();
+        return right.interpretSQL() + "!="+left.interpretSQL();
     }
 }

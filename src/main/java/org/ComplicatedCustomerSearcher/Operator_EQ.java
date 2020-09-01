@@ -15,6 +15,6 @@ public class Operator_EQ implements Expression{
 
     @Override
     public String interpretSQL() {
-        return right.interpretSQL() + " == "+left.interpretSQL();
+        return right.interpretSQL() + "=="+left.interpretSQL();
     }
 }

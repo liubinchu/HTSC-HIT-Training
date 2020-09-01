@@ -13,6 +13,6 @@ public class Operator_OR implements Expression {
 
     @Override
     public String interpretSQL() {
-        return " ( "+right.interpretSQL() + " OR "+left.interpretSQL()+" ) ";
+        return "("+right.interpretSQL() + "OR"+left.interpretSQL()+")";
     }
 }

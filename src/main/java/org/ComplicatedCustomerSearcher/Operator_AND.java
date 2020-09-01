@@ -15,6 +15,6 @@ public class Operator_AND implements Expression {
 
     @Override
     public String interpretSQL() {
-        return " ( "+right.interpretSQL() + " AND "+left.interpretSQL()+" ) ";
+        return "("+right.interpretSQL() + "AND"+left.interpretSQL()+")";
     }
 }

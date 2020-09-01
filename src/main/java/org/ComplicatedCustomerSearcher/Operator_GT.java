@@ -14,6 +14,6 @@ public class Operator_GT implements Expression {
 
     @Override
     public String interpretSQL() {
-        return right.interpretSQL() + " > "+left.interpretSQL();
+        return right.interpretSQL() + ">"+left.interpretSQL();
     }
 }
