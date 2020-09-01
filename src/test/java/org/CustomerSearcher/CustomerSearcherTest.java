@@ -101,6 +101,4 @@ public class CustomerSearcherTest {
                 "Phone", "=", "820 880 8807"));
         customerSearcherTestFunc(SQLGenerator(elements), CorrectSQLGenerator(elements));
     }
-
-
 }
